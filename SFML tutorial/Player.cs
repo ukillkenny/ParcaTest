@@ -8,70 +8,100 @@ using System.Text;
 
 namespace SFML_tutorial
 {
-    class Player
+    class Player : GameObjectBase
     {
-        private Texture texture;
-        private Sprite sprite;
-        private Vector2f position;
         private float speed;
-        private Shoot shoot;
+        private List<Shoot> shoots;
+ 
 
 
-        public Player()
+        public Player() : base("Sprites/reaper1.png", new Vector2f(5.0f, 0.0f))
         {
-            texture = new Texture("Sprites/reaper1.png");
-            sprite = new Sprite(texture);
+          
             sprite.Scale = new Vector2f(0.5f, 0.5f);
-            position = new Vector2f(5.0f, 0.0f);
-            sprite.Position = position;
             speed = 250.0f;
+            shoots = new List<Shoot>();
             
 
         }
 
-        public void Update()
+        public override void Update()
+        {
+            Movement();
+            Shooting();
+            DeletAllShoots();
+            base.Update();
+        }
+
+        public override void Draw(RenderWindow window)
+        {
+            base.Draw(window);
+            for (int i = 0; i < shoots.Count; i++)
+            {
+                shoots[i].Draw(window);
+            }
+
+            
+        }
+
+        private void Movement()
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))
             {
-                position.X += speed * (1.0f / (float)Game.FRAMERATE_LIMIT);
+                currentPosition.X += speed * FrameRate.GetDeltaTime();
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
-                position.X -= speed * (1.0f / (float)Game.FRAMERATE_LIMIT);
+                currentPosition.X -= speed * FrameRate.GetDeltaTime();
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.W))
             {
-                position.Y -= speed * (1.0f / (float)Game.FRAMERATE_LIMIT);
+                currentPosition.Y -= speed * FrameRate.GetDeltaTime();
 
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.S))
             {
-                position.Y += speed * (1.0f / (float)Game.FRAMERATE_LIMIT);
+                currentPosition.Y += speed * FrameRate.GetDeltaTime();
 
             }
+
+        }
+
+        private void Shooting()
+        {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
-                shoot = new Shoot(position);                
-            }
-            if (shoot != null)
-            {
-                shoot.Update();
-            }
-            
+                Vector2f spawnPosition = currentPosition;
+                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 10.0f;
+                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100.0f;
+                shoots.Add(new Shoot(spawnPosition));
 
-            sprite.Position = position;
-        
+            }
         }
 
-        public void Draw(RenderWindow window)
+        private void DeletAllShoots()
         {
-            if (shoot != null)
+            List<int> indexToDelet = new List<int>();
+
+            for (int i = 0; i < shoots.Count; i++)
             {
-                shoot.Draw(window);
+                shoots[i].Update();
+
+                if (shoots[i].GetPosition().X > Game.GetWindowSize().X)
+                {
+                    indexToDelet.Add(i);
+
+                }
             }
-            
-            window.Draw(sprite);
+
+            for (int i = indexToDelet.Count - 1; i >= 0; i--)
+            {
+                shoots[i].Dispose();
+                shoots.RemoveAt(i);
+            }
         }
+
+        
 
     }
 }

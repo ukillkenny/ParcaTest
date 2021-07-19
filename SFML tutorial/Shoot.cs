@@ -7,31 +7,23 @@ using System.Text;
 
 namespace SFML_tutorial
 {
-    class Shoot
+    class Shoot : GameObjectBase
     {
-        private Texture texture;
-        private Sprite sprite;
-        private float ShootSpeed;
-        public Shoot(Vector2f position)
-        {
-            texture = new Texture("Sprites/shoot.png");
-            sprite = new Sprite(texture);
-            sprite.Scale = new Vector2f(1.0f, 1.0f);
-            sprite.Position = position;
-            ShootSpeed = 450.0f;
 
+        public Shoot(Vector2f startPosition) : base("Sprites/shoot.png", startPosition)
+        {
+            //sprite.Scale = new Vector2f(1.0f, 1.0f);
+            
         }
 
-        public void Update()
+        public override void Update()
         {
-            sprite.Position += new Vector2f( ShootSpeed * (1.0f / (float)Game.FRAMERATE_LIMIT), 0.0f);           
-
+            currentPosition.X += 700 * FrameRate.GetDeltaTime();
+            base.Update();  
+            
         }
 
-        public void Draw(RenderWindow window)
-        {
-            window.Draw(sprite);
-        }
+
 
     }
 }

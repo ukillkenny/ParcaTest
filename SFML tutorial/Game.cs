@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using SFML.Window;
 using SFML.Graphics;
+using SFML.System;
 
 namespace SFML_tutorial
 {
     class Game
     {
+        
+        private static Vector2f windowSize;
         private RenderWindow window;
-        public static readonly uint FRAMERATE_LIMIT = 60;
         private Gameplay gameplay;
+
         public Game()
         {
             VideoMode videomode = new VideoMode();
@@ -19,7 +22,7 @@ namespace SFML_tutorial
 
             window = new RenderWindow(videomode, "My Game");
             window.Closed += CloseWindow;
-            window.SetFramerateLimit(FRAMERATE_LIMIT);
+            window.SetFramerateLimit(FrameRate.FRAMERATE_LIMIT);
 
             gameplay = new Gameplay();
         }
@@ -40,12 +43,19 @@ namespace SFML_tutorial
         public void UpdateGame()
         {
             gameplay.Update();
+            windowSize = window.GetView().Size;
         }
 
         public void DrawGame()
         {
             gameplay.Draw(window);
             window.Display();
+        }
+
+
+        public static Vector2f GetWindowSize()
+        {
+            return windowSize;
         }
         
     
