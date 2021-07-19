@@ -18,7 +18,7 @@ namespace SFML_tutorial
         public Player() : base("Sprites/reaper1.png", new Vector2f(5.0f, 0.0f))
         {
           
-            sprite.Scale = new Vector2f(0.5f, 0.5f);
+            sprite.Scale = new Vector2f(0.3f, 0.3f);
             speed = 250.0f;
             shoots = new List<Shoot>();
             
@@ -72,8 +72,8 @@ namespace SFML_tutorial
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 Vector2f spawnPosition = currentPosition;
-                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 10.0f;
-                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100.0f;
+                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 1f;
+                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100f;
                 shoots.Add(new Shoot(spawnPosition));
 
             }
