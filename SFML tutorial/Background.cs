@@ -16,7 +16,7 @@ namespace SFML_tutorial
 
         public Background()
         {
-            texture = new Texture("Sprites/background.png");
+            texture = new Texture("Sprites/BackgroundOk.png");
             sprite = new Sprite(texture);
             sprite.Scale = new Vector2f(1.0f, 1.0f);
             position = new Vector2f(0.0f, 0.0f);

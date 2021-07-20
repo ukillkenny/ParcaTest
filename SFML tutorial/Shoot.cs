@@ -10,10 +10,10 @@ namespace SFML_tutorial
     class Shoot : GameObjectBase
     {
 
-        public Shoot(Vector2f startPosition) : base("Sprites/shoot.png", startPosition)
+        public Shoot(Vector2f startPosition) : base("Sprites/shootsAn.png", new IntRect(0, 0 , 300, 300), startPosition)
         {
             
-            sprite.Scale = new Vector2f(0.3f, 0.3f);
+            sprite.Scale = new Vector2f(1f, 1f);
             
         }
 

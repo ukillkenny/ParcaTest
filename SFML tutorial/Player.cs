@@ -4,7 +4,7 @@ using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading;
 
 namespace SFML_tutorial
 {
@@ -12,16 +12,17 @@ namespace SFML_tutorial
     {
         private float speed;
         private List<Shoot> shoots;
- 
+        //private Clock clock;
+        //private Time shootingTime;
+        //private float deltaShootingTime;
+       
 
-
-        public Player() : base("Sprites/reaper1.png", new Vector2f(5.0f, 0.0f))
+        public Player() : base("Sprites/reaperok01.png", new IntRect (0, 0,  300,  300), new Vector2f(5.0f, 0.0f))
         {
           
-            sprite.Scale = new Vector2f(0.3f, 0.3f);
+            sprite.Scale = new Vector2f(1f, 1f);
             speed = 250.0f;
             shoots = new List<Shoot>();
-            
 
         }
 
@@ -50,6 +51,7 @@ namespace SFML_tutorial
             {
                 currentPosition.X += speed * FrameRate.GetDeltaTime();
             }
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
                 currentPosition.X -= speed * FrameRate.GetDeltaTime();
@@ -69,14 +71,19 @@ namespace SFML_tutorial
 
         private void Shooting()
         {
+            
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 Vector2f spawnPosition = currentPosition;
-                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 1f;
+                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 4f;
                 spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100f;
                 shoots.Add(new Shoot(spawnPosition));
 
+
             }
+
+
         }
 
         private void DeletAllShoots()
@@ -100,8 +107,7 @@ namespace SFML_tutorial
                 shoots.RemoveAt(i);
             }
         }
-
-        
+       
 
     }
 }
