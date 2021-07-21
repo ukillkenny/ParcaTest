@@ -12,22 +12,39 @@ namespace SFML_tutorial
     {
         private float speed;
         private List<Shoot> shoots;
-        //private Clock clock;
-        //private Time shootingTime;
+        private IntRect frameRect;
+        private int sheetColumns;
+        private int sheetRow;
+        //private int frames;
+        private Clock frameTimer;
+        private int currentFrame = 0;
+        private float animationTime = 1f;
+        private Clock timerAnimation;
+
+
+        //private Time previousShootingTime;
+        //private Time currentShootingTime;
         //private float deltaShootingTime;
-       
 
-        public Player() : base("Sprites/reaperok01.png", new IntRect (0, 0,  300,  300), new Vector2f(5.0f, 0.0f))
+        public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow) : base()
         {
-          
-            sprite.Scale = new Vector2f(1f, 1f);
-            speed = 250.0f;
+            
+            currentPosition = position;
+            this.sheetColumns = sheetColumns;
+            this.sheetRow = sheetRow;
+            texture = new Texture(spriteSheetPath);
+            frameRect = new IntRect(0, 0, (int)texture.Size.X / sheetColumns, (int)texture.Size.Y / sheetRow);
+            sprite = new Sprite(texture, frameRect);
+            sprite.Scale = new Vector2f(0.8f, 0.8f);
+            speed = 450.0f;
             shoots = new List<Shoot>();
-
+            frameTimer = new Clock();
+            timerAnimation = new Clock();
         }
 
         public override void Update()
         {
+            UpdateAnimation();
             Movement();
             Shooting();
             DeletAllShoots();
@@ -42,7 +59,29 @@ namespace SFML_tutorial
                 shoots[i].Draw(window);
             }
 
-            
+        }
+
+        private void UpdateAnimation()
+        {
+            if (frameTimer.ElapsedTime.AsSeconds() > animationTime / sheetColumns)
+            {
+                currentFrame++;
+                if (currentFrame >= sheetColumns)
+                {
+                    currentFrame = 0;
+                }
+                frameRect.Left = currentFrame * frameRect.Width;
+                sprite.TextureRect = frameRect;
+                frameTimer.Restart(); 
+   
+            }
+
+            //if (timerAnimation.ElapsedTime.AsSeconds() > animationTime)
+            //{
+            //    currentFrame = 0;
+            //    timerAnimation.Restart();
+            //}
+
         }
 
         private void Movement()
@@ -107,7 +146,7 @@ namespace SFML_tutorial
                 shoots.RemoveAt(i);
             }
         }
-       
+      
 
     }
 }

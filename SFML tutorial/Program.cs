@@ -1,5 +1,7 @@
 ﻿using SFML.System;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SFML_tutorial
 {
@@ -19,6 +21,7 @@ namespace SFML_tutorial
                 FrameRate.OnFrameEnd();
                 Console.WriteLine(FrameRate.GetCurrentFPS());
             }
+
 
             Console.ReadKey();
         }

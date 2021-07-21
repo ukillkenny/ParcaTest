@@ -13,7 +13,7 @@ namespace SFML_tutorial
         public Shoot(Vector2f startPosition) : base("Sprites/shootsAn.png", new IntRect(0, 0 , 300, 300), startPosition)
         {
             
-            sprite.Scale = new Vector2f(1f, 1f);
+            sprite.Scale = new Vector2f(0.8f, 0.8f);
             
         }
 

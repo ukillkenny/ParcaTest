@@ -13,12 +13,20 @@ namespace SFML_tutorial
         protected Sprite sprite;
         protected Vector2f currentPosition;
 
+
+
         public GameObjectBase(string texturePath, IntRect area, Vector2f startPosition)
         {
             texture = new Texture(texturePath);
             sprite = new Sprite(texture, area);
             currentPosition = startPosition;
             sprite.Position = currentPosition;
+
+
+        }
+
+        public GameObjectBase()
+        {
 
         }
 

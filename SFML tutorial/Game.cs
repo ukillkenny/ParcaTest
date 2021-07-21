@@ -13,6 +13,7 @@ namespace SFML_tutorial
         private static Vector2f windowSize;
         private RenderWindow window;
         private Gameplay gameplay;
+        private Clock clock;
 
         public Game()
         {
@@ -42,6 +43,7 @@ namespace SFML_tutorial
 
         public void UpdateGame()
         {
+
             gameplay.Update();
             windowSize = window.GetView().Size;
         }
