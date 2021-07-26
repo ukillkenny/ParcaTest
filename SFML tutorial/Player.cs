@@ -15,18 +15,19 @@ namespace SFML_tutorial
         private IntRect frameRect;
         private int sheetColumns;
         private int sheetRow;
-        //private int frames;
         private Clock frameTimer;
         private int currentFrame = 0;
         private float animationTime = 1f;
         private Clock timerAnimation;
 
+        private string name;
+        private int life;
+        private int maxLife;
+        private int mana;
+        private int maxMana;
 
-        //private Time previousShootingTime;
-        //private Time currentShootingTime;
-        //private float deltaShootingTime;
 
-        public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow) : base()
+        public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int maxMana) : base()
         {
             
             currentPosition = position;
@@ -40,6 +41,12 @@ namespace SFML_tutorial
             shoots = new List<Shoot>();
             frameTimer = new Clock();
             timerAnimation = new Clock();
+
+            this.name = name;
+            this.maxLife = maxLife;
+            this.life = maxLife;
+            this.maxMana = maxMana;
+            this.mana = maxMana;
         }
 
         public override void Update()
@@ -76,12 +83,6 @@ namespace SFML_tutorial
    
             }
 
-            //if (timerAnimation.ElapsedTime.AsSeconds() > animationTime)
-            //{
-            //    currentFrame = 0;
-            //    timerAnimation.Restart();
-            //}
-
         }
 
         private void Movement()
@@ -106,11 +107,12 @@ namespace SFML_tutorial
 
             }
 
+            currentPosition.Y += 250f * FrameRate.GetDeltaTime();
+
         }
 
         private void Shooting()
         {
-            
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
@@ -118,8 +120,7 @@ namespace SFML_tutorial
                 spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 4f;
                 spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100f;
                 shoots.Add(new Shoot(spawnPosition));
-
-
+          
             }
 
 
@@ -146,7 +147,21 @@ namespace SFML_tutorial
                 shoots.RemoveAt(i);
             }
         }
-      
+
+        public void DoDamage(int amount)
+        {
+            life -= amount;
+            if (life <= 0)
+            {
+                Console.WriteLine("F");
+            }
+        }
+
+        public bool IsDead()
+        {
+            return life <= 0;
+        }
+
 
     }
 }

@@ -16,7 +16,7 @@ namespace SFML_tutorial
         public Gameplay()
         {
             background = new Background();
-            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3);
+            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800, 120);
         }
 
         public void Update()
