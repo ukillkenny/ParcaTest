@@ -13,7 +13,8 @@ namespace SFML_tutorial
         private static Vector2f windowSize;
         private RenderWindow window;
         private Gameplay gameplay;
-        private Clock clock;
+        //private Clock clock;
+        private Camera camera;
 
         public Game()
         {
@@ -25,6 +26,7 @@ namespace SFML_tutorial
             window.Closed += CloseWindow;
             window.SetFramerateLimit(FrameRate.FRAMERATE_LIMIT);
 
+            camera = new Camera(window);
             gameplay = new Gameplay();
         }
 
@@ -45,6 +47,7 @@ namespace SFML_tutorial
         {
 
             gameplay.Update();
+            camera.UpdateCamera();
             windowSize = window.GetView().Size;
         }
 
@@ -52,6 +55,11 @@ namespace SFML_tutorial
         {
             gameplay.Draw(window);
             window.Display();
+        }
+
+        public void CheckGarbage()
+        {
+            gameplay.CheckGarbage();
         }
 
 

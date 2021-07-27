@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SFML_tutorial
 {
-    class Player : GameObjectBase
+    class Player : GameObjectBase, IColisionable
     {
         private float speed;
         private List<Shoot> shoots;
@@ -41,6 +41,7 @@ namespace SFML_tutorial
             shoots = new List<Shoot>();
             frameTimer = new Clock();
             timerAnimation = new Clock();
+            CollisionManager.GetInstance().AddToCollisionManager(this);
 
             this.name = name;
             this.maxLife = maxLife;
@@ -107,7 +108,7 @@ namespace SFML_tutorial
 
             }
 
-            currentPosition.Y += 250f * FrameRate.GetDeltaTime();
+            //currentPosition.Y += 250f * FrameRate.GetDeltaTime();
 
         }
 
@@ -162,6 +163,44 @@ namespace SFML_tutorial
             return life <= 0;
         }
 
+        public FloatRect GetBounds()
+        {
+            return sprite.GetGlobalBounds();
+        }
+
+        public void OnColision(IColisionable other)
+        {
+            
+        }
+
+        public string GetTag()
+        {
+            return "Reaper";
+        }
+
+        public override void CheckGarbage()
+        {
+            List<int> indexToDelet = new List<int>();
+
+            for (int i = 0; i < shoots.Count; i++)
+            {
+                shoots[i].CheckGarbage();
+                if (shoots[i].toDelete)
+                {
+                    indexToDelet.Add(i);
+                }
+            }
+            for (int i = 0; i < indexToDelet.Count; i++)
+            {
+                shoots.RemoveAt(i);
+            }
+        }
+
+        public override void Dispose()
+        {
+            CollisionManager.GetInstance().RemoveFromCollisionManager(this);
+            base.Dispose();
+        }
 
     }
 }

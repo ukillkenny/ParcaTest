@@ -12,16 +12,17 @@ namespace SFML_tutorial
         protected Texture texture;
         protected Sprite sprite;
         protected Vector2f currentPosition;
+        public bool toDelete;
 
 
 
-        public GameObjectBase(string texturePath, IntRect area, Vector2f startPosition)
+        public GameObjectBase(string texturePath, Vector2f startPosition)
         {
             texture = new Texture(texturePath);
-            sprite = new Sprite(texture, area);
+            sprite = new Sprite(texture);
             currentPosition = startPosition;
             sprite.Position = currentPosition;
-
+            toDelete = false;
 
         }
 
@@ -42,11 +43,14 @@ namespace SFML_tutorial
         }
  
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             sprite.Dispose();
             texture.Dispose();
+            toDelete = true;
         }
+
+        public abstract void CheckGarbage();
 
         public Vector2f GetPosition()
         {
