@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SFML_tutorial
 {
-    public class Camera
+    public class Camera //: IColisionable
     {
 
         private RenderWindow window;
@@ -18,7 +18,8 @@ namespace SFML_tutorial
         {
             this.window = window;
             view = window.GetView();
-            currentPositionCamera = view.Center;  
+            currentPositionCamera = view.Center;
+            //CollisionManager.GetInstance().AddToCollisionManager(this);
         }
 
         public void UpdateCamera()
@@ -37,6 +38,33 @@ namespace SFML_tutorial
             window.SetView(view);
 
         }
+
+        //public FloatRect GetBounds()
+        //{
+        //    return currentPositionCamera.GetGlobalBounds();
+        //}
+        //
+        //public string GetTag()
+        //{
+        //    return "colisionCamera";
+        //}
+        //
+        //public void OnColision(IColisionable other)
+        //{
+        //    if (other is invisibleLimitLeft)
+        //    {
+        //        if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+        //        {
+        //            currentPositionCamera.X += 380 * FrameRate.GetDeltaTime();
+        //        }
+        //
+        //    }
+        //
+        //    if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+        //    {
+        //        currentPositionCamera.X -= 380 * FrameRate.GetDeltaTime();
+        //    }
+        //}
 
     }
 }

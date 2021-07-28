@@ -170,6 +170,44 @@ namespace SFML_tutorial
 
         public void OnColision(IColisionable other)
         {
+            if (other is InvisibleBottomWall || other is InvisibleTopWall || other is invisibleLimitLeft || other is InvisibleLimitRight)
+            {
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+                {
+                    currentPosition.Y -= speed * FrameRate.GetDeltaTime();
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                    {
+                        currentPosition.X += speed * FrameRate.GetDeltaTime();
+                    }
+                    else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                    {
+                        currentPosition.X -= speed * FrameRate.GetDeltaTime();
+                    }
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+                {
+                    currentPosition.Y += speed * FrameRate.GetDeltaTime();
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                    {
+                        currentPosition.X += speed * FrameRate.GetDeltaTime();
+                    }
+                    else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                    {
+                        currentPosition.X -= speed * FrameRate.GetDeltaTime();
+                    }
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                {
+                    currentPosition.X += speed * FrameRate.GetDeltaTime();
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                {
+                    currentPosition.X -= speed * FrameRate.GetDeltaTime();
+                }
+            }
             
         }
 
@@ -195,6 +233,7 @@ namespace SFML_tutorial
                 shoots.RemoveAt(i);
             }
         }
+
 
         public override void Dispose()
         {

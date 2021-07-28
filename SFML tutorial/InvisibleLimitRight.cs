@@ -6,18 +6,16 @@ using System.Text;
 
 namespace SFML_tutorial
 {
-    class InvisibleBottomWall : IColisionable
+    class InvisibleLimitRight : IColisionable
     {
         private Vector2f position;
         private Vector2f size;
-        public InvisibleBottomWall(Vector2f position, Vector2f size)
+        public InvisibleLimitRight(Vector2f position, Vector2f size)
         {
             this.position = position;
             this.size = size;
             CollisionManager.GetInstance().AddToCollisionManager(this);
         }
-            
-
 
         public FloatRect GetBounds()
         {
@@ -26,7 +24,7 @@ namespace SFML_tutorial
 
         public string GetTag()
         {
-            return "InvisibleBottomWall";
+            return "InvisibleLimitRight";
         }
 
         public void OnColision(IColisionable other)

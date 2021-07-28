@@ -11,10 +11,14 @@ namespace SFML_tutorial
     {
         private Background background;
         private Player player;
-        private Vector2f initialPlayerPosition = new Vector2f(0.5f,0.5f);
+        private Vector2f initialPlayerPosition = new Vector2f(1.0f,750.0f);
 
         private Rock rock;
         private RockTwo rockTwo;
+        private InvisibleBottomWall invisibleBottomWall;
+        private InvisibleTopWall invisibleTopWall;
+        private invisibleLimitLeft invisibleLimitLeft;
+        private InvisibleLimitRight InvisibleLimitRight;
 
         public Gameplay()
         {
@@ -22,6 +26,11 @@ namespace SFML_tutorial
             player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800, 120);
             rock = new Rock();
             rockTwo = new RockTwo();
+
+            invisibleBottomWall = new InvisibleBottomWall(new Vector2f(0.1f, 1080.0f), new Vector2f(6000.0f, 0.1f));
+            invisibleTopWall = new InvisibleTopWall(new Vector2f(0.1f, 680.0f), new Vector2f(6000.0f, 0.1f));
+            invisibleLimitLeft = new invisibleLimitLeft(new Vector2f(0.1f, 0.1f), new Vector2f(0.1f, 1080.0f));
+            InvisibleLimitRight = new InvisibleLimitRight(new Vector2f(6000.0f, 0.1f), new Vector2f(0.1f, 1080.0f));
         }
 
         public void Update()
