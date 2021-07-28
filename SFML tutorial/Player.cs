@@ -19,6 +19,7 @@ namespace SFML_tutorial
         private int currentFrame = 0;
         private float animationTime = 1f;
         private Clock timerAnimation;
+        private Vector2f fireRange;
 
         private string name;
         private int life;
@@ -135,11 +136,17 @@ namespace SFML_tutorial
             {
                 shoots[i].Update();
 
-                if (shoots[i].GetPosition().X > Game.GetWindowSize().X)
+                if (shoots[i].GetPosition().X > Camera.GetCameraSize().X)
                 {
                     indexToDelet.Add(i);
 
                 }
+
+                //if (shoots[i].GetPosition().X > Game.GetWindowSize().X)
+                //{
+                //    indexToDelet.Add(i);
+                //
+                //}
             }
 
             for (int i = indexToDelet.Count - 1; i >= 0; i--)

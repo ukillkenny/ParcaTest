@@ -9,7 +9,7 @@ namespace SFML_tutorial
 {
     public class Camera //: IColisionable
     {
-
+        private static Vector2f cameraSize;
         private RenderWindow window;
         private View view;
         private Vector2f currentPositionCamera;
@@ -24,6 +24,8 @@ namespace SFML_tutorial
 
         public void UpdateCamera()
         {
+            cameraSize = window.GetView().Size;
+
             if ((Keyboard.IsKeyPressed(Keyboard.Key.D)))
             {
                 currentPositionCamera.X += 380 * FrameRate.GetDeltaTime();
@@ -37,6 +39,11 @@ namespace SFML_tutorial
             view.Center = currentPositionCamera;
             window.SetView(view);
 
+        }
+
+        public static Vector2f GetCameraSize()
+        {
+            return cameraSize;
         }
 
         //public FloatRect GetBounds()

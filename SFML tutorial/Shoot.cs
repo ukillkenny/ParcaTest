@@ -10,13 +10,14 @@ namespace SFML_tutorial
 {
     class Shoot : GameObjectBase, IColisionable
     {
-        
-        public Shoot(Vector2f startPosition) : base("sprites" + Path.DirectorySeparatorChar + "shootsAn.png", startPosition)
+
+
+        public Shoot(Vector2f startPosition) : base("sprites" + Path.DirectorySeparatorChar + "shoot.png", startPosition)
         {
             
-            sprite.Scale = new Vector2f(0.8f, 0.8f);
+            sprite.Scale = new Vector2f(0.4f, 0.4f);
             CollisionManager.GetInstance().AddToCollisionManager(this);
-
+        
         }
 
         public override void CheckGarbage()
