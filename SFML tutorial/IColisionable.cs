@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SFML_tutorial
 {
-    interface IColisionable
+    public interface IColisionable
     {
         public FloatRect GetBounds();
         public void OnColision(IColisionable other);

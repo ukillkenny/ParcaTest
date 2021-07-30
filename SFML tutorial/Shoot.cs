@@ -42,7 +42,7 @@ namespace SFML_tutorial
         public override void Update()
         {
             
-            currentPosition.X += 700 * FrameRate.GetDeltaTime();
+            currentPosition.X += 1300 * FrameRate.GetDeltaTime();
             base.Update();  
             
         }

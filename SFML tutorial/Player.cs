@@ -12,6 +12,8 @@ namespace SFML_tutorial
     {
         private float speed;
         private List<Shoot> shoots;
+        private float fireDelay;
+        private float fireRate;
         private IntRect frameRect;
         private int sheetColumns;
         private int sheetRow;
@@ -20,6 +22,7 @@ namespace SFML_tutorial
         private float animationTime = 1f;
         private Clock timerAnimation;
         private Vector2f fireRange;
+
 
         private string name;
         private int life;
@@ -43,6 +46,9 @@ namespace SFML_tutorial
             frameTimer = new Clock();
             timerAnimation = new Clock();
             CollisionManager.GetInstance().AddToCollisionManager(this);
+            fireRate = 0.2f;
+            fireDelay = 0.2f;
+            fireRange = new Vector2f(1300.0f, 0.0f);
 
             this.name = name;
             this.maxLife = maxLife;
@@ -116,15 +122,17 @@ namespace SFML_tutorial
         private void Shooting()
         {
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && fireDelay >= fireRate)
             {
                 Vector2f spawnPosition = currentPosition;
                 spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 4f;
                 spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100f;
                 shoots.Add(new Shoot(spawnPosition));
-          
-            }
+                fireDelay = 0.0f;
 
+
+            }
+            fireDelay += FrameRate.GetDeltaTime();
 
         }
 
@@ -136,11 +144,20 @@ namespace SFML_tutorial
             {
                 shoots[i].Update();
 
-                if (shoots[i].GetPosition().X > Camera.GetCameraSize().X)
+                if (shoots[i].GetPosition().X > currentPosition.X + fireRange.X)
                 {
                     indexToDelet.Add(i);
-
+                
                 }
+
+
+                //if (shoots[i].GetPosition().X > Camera.GetCameraSize().X)
+                //{
+                //    indexToDelet.Add(i);
+                //
+                //}
+
+
 
                 //if (shoots[i].GetPosition().X > Game.GetWindowSize().X)
                 //{
@@ -208,6 +225,7 @@ namespace SFML_tutorial
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 {
                     currentPosition.X += speed * FrameRate.GetDeltaTime();
+
                 }
 
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D))

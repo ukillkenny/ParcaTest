@@ -15,6 +15,7 @@ namespace SFML_tutorial
         private Gameplay gameplay;
         //private Clock clock;
         private Camera camera;
+        private View view;
 
         public Game()
         {
