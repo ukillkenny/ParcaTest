@@ -23,10 +23,12 @@ namespace SFML_tutorial
         private float animationTime = 1f;
         private Clock timerAnimation;
 
+        //private Vector2f initialEnemyArea;
+        //private Clock enemyMoveTimer;
 
         private int MinAttack;
         private int MaxAttack;
-        public Enemy(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minAttack, int maxAttack)
+        public Enemy(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minAttack, int maxAttack) : base()
         {
             currentPosition = position;
             this.sheetColumns = sheetColumns;
@@ -77,6 +79,11 @@ namespace SFML_tutorial
 
         }
 
+        public void EnemyArea()
+        {
+
+        }
+
         public FloatRect GetBounds()
         {
             return sprite.GetGlobalBounds();
@@ -91,7 +98,9 @@ namespace SFML_tutorial
         {
             if (other is Shoot)
             {
-                LateDispose();
+
+                DoDamage(Shoot.ShootDamage(200));
+                
             }
             
         }
@@ -101,5 +110,21 @@ namespace SFML_tutorial
             CollisionManager.GetInstance().RemoveFromCollisionManager(this);
             base.DisposeNow();
         }
+
+        public void DoDamage(int amount)
+        {
+            life -= amount;
+            if (life <= 0)
+            {
+                LateDispose();
+            }
+        }
+
+        public bool IsDead()
+        {
+            return life <= 0;
+        }
+
+        
     }
 }

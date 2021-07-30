@@ -150,20 +150,6 @@ namespace SFML_tutorial
                 
                 }
 
-
-                //if (shoots[i].GetPosition().X > Camera.GetCameraSize().X)
-                //{
-                //    indexToDelet.Add(i);
-                //
-                //}
-
-
-
-                //if (shoots[i].GetPosition().X > Game.GetWindowSize().X)
-                //{
-                //    indexToDelet.Add(i);
-                //
-                //}
             }
 
             for (int i = indexToDelet.Count - 1; i >= 0; i--)

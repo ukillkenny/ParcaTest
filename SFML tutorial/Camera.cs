@@ -16,7 +16,9 @@ namespace SFML_tutorial
         private Vector2f currentPositionCamera;
         private FloatRect viewport;
         //private FloatRect currenPositionCamera;
-     
+
+
+
 
         public Camera(RenderWindow window)
         {
@@ -26,6 +28,7 @@ namespace SFML_tutorial
             currentPositionCamera = view.Center;
             //currenPositionCamera = view.Viewport;
             CollisionManager.GetInstance().AddToCollisionManager(this);
+
         }
 
 
@@ -98,6 +101,8 @@ namespace SFML_tutorial
             //}
 
         }
+
+        
 
         ///if (Keyboard.IsKeyPressed(Keyboard.Key.D))
         ///{
