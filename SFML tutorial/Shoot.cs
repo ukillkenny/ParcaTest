@@ -20,10 +20,6 @@ namespace SFML_tutorial
         
         }
 
-        public override void CheckGarbage()
-        {
-        }
-
         public FloatRect GetBounds()
         {
             return sprite.GetGlobalBounds();
@@ -36,7 +32,10 @@ namespace SFML_tutorial
 
         public void OnColision(IColisionable other)
         {
-            
+            if (other is Enemy)
+            {
+                LateDispose();
+            }   
         }
 
         public override void Update()
@@ -47,10 +46,10 @@ namespace SFML_tutorial
             
         }
 
-        public override void Dispose()
+        public override void DisposeNow()
         {
             CollisionManager.GetInstance().RemoveFromCollisionManager(this);
-            base.Dispose();
+            base.DisposeNow();
         }
 
 

@@ -25,7 +25,7 @@ namespace SFML_tutorial
             }
 
 
-            Console.ReadKey();
+
         }
     }
 }

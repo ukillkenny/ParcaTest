@@ -11,7 +11,9 @@ namespace SFML_tutorial
     {
         private Background background;
         private Player player;
+        private Enemy enemy;
         private Vector2f initialPlayerPosition = new Vector2f(1.0f,750.0f);
+        private Vector2f initialEnemiesPosition = new Vector2f(1000.0f, 750.0f);
 
         private Rock rock;
         private RockTwo rockTwo;
@@ -23,7 +25,8 @@ namespace SFML_tutorial
         public Gameplay()
         {
             background = new Background();
-            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800, 120);
+            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800, 150, 100);
+            enemy = new Enemy(initialEnemiesPosition, "Enemy/animacion-enemigo.png", 4, 2, "Dementor", 800, 120, 200);
             rock = new Rock();
             rockTwo = new RockTwo();
 
@@ -40,7 +43,11 @@ namespace SFML_tutorial
             {
                 player.Update();
             }
-           
+            if (enemy != null)
+            {
+                enemy.Update();
+            }
+
 
         }
 
@@ -50,6 +57,10 @@ namespace SFML_tutorial
             if (player != null)
             {
                 player.Draw(window);
+            }
+            if (enemy != null)
+            {
+                enemy.Draw(window);
             }
             rock.Draw(window);
             rockTwo.Draw(window);
@@ -64,6 +75,16 @@ namespace SFML_tutorial
                 if (player.toDelete)
                 {
                     player = null; 
+                }
+            }
+
+            if (enemy != null)
+            {
+                enemy.CheckGarbage();
+
+                if (enemy.toDelete)
+                {
+                    enemy = null;
                 }
             }
             

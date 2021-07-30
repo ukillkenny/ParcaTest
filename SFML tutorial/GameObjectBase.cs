@@ -12,6 +12,7 @@ namespace SFML_tutorial
         protected Texture texture;
         protected Sprite sprite;
         protected Vector2f currentPosition;
+        private bool lateDispose;
         public bool toDelete;
 
 
@@ -23,6 +24,7 @@ namespace SFML_tutorial
             currentPosition = startPosition;
             sprite.Position = currentPosition;
             toDelete = false;
+            lateDispose = false;
 
         }
 
@@ -43,14 +45,25 @@ namespace SFML_tutorial
         }
  
 
-        public virtual void Dispose()
+        public virtual void DisposeNow()
         {
             sprite.Dispose();
             texture.Dispose();
             toDelete = true;
         }
 
-        public abstract void CheckGarbage();
+        public void LateDispose()
+        {
+            lateDispose = true;
+        }
+
+        public virtual void CheckGarbage()
+        {
+            if (lateDispose == true)
+            {
+                DisposeNow();
+            }
+        }
 
         public Vector2f GetPosition()
         {

@@ -31,7 +31,7 @@ namespace SFML_tutorial
         private int maxMana;
 
 
-        public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int maxMana) : base()
+        public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minMana, int maxMana) : base()
         {
             
             currentPosition = position;
@@ -168,7 +168,7 @@ namespace SFML_tutorial
 
             for (int i = indexToDelet.Count - 1; i >= 0; i--)
             {
-                shoots[i].Dispose();
+                shoots[i].DisposeNow();
                 shoots.RemoveAt(i);
             }
         }
@@ -257,13 +257,18 @@ namespace SFML_tutorial
             {
                 shoots.RemoveAt(i);
             }
+            if (toDelete == true)
+            {
+                DisposeNow();
+            }
+            base.CheckGarbage();
         }
 
 
-        public override void Dispose()
+        public override void DisposeNow()
         {
             CollisionManager.GetInstance().RemoveFromCollisionManager(this);
-            base.Dispose();
+            base.DisposeNow();
         }
 
     }
