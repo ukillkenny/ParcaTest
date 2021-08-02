@@ -14,7 +14,7 @@ namespace SFML_tutorial
         public Shoot(Vector2f startPosition) : base("sprites" + Path.DirectorySeparatorChar + "shoot.png", startPosition)
         {
             
-            sprite.Scale = new Vector2f(0.4f, 0.4f);
+            sprite.Scale = new Vector2f(0.2f, 0.2f);
             CollisionManager.GetInstance().AddToCollisionManager(this);
             
         

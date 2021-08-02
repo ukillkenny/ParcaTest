@@ -125,8 +125,8 @@ namespace SFML_tutorial
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && fireDelay >= fireRate)
             {
                 Vector2f spawnPosition = currentPosition;
-                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 4f;
-                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 100f;
+                spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 5f;
+                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y) / 10f;
                 shoots.Add(new Shoot(spawnPosition));
                 fireDelay = 0.0f;
 
@@ -157,20 +157,6 @@ namespace SFML_tutorial
                 shoots[i].DisposeNow();
                 shoots.RemoveAt(i);
             }
-        }
-
-        public void DoDamage(int amount)
-        {
-            life -= amount;
-            if (life <= 0)
-            {
-                Console.WriteLine("F");
-            }
-        }
-
-        public bool IsDead()
-        {
-            return life <= 0;
         }
 
         public FloatRect GetBounds()
@@ -257,5 +243,20 @@ namespace SFML_tutorial
             base.DisposeNow();
         }
 
+        public void playerDoDamage(int amount)
+        {
+            life -= amount;
+            if (life <= 0)
+            {
+                IsDead();
+            }
+
+        }
+
+        public bool IsDead()
+        {
+            LateDispose();
+            return life <= 0;
+        }
     }
 }
