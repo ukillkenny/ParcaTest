@@ -33,7 +33,7 @@ namespace SFML_tutorial
 
         public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minMana, int maxMana) : base()
         {
-            
+
             currentPosition = position;
             this.sheetColumns = sheetColumns;
             this.sheetRow = sheetRow;
@@ -87,8 +87,8 @@ namespace SFML_tutorial
                 }
                 frameRect.Left = currentFrame * frameRect.Width;
                 sprite.TextureRect = frameRect;
-                frameTimer.Restart(); 
-   
+                frameTimer.Restart();
+
             }
 
         }
@@ -126,7 +126,7 @@ namespace SFML_tutorial
             {
                 Vector2f spawnPosition = currentPosition;
                 spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 5f;
-                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y) / 10f;
+                spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 10f;
                 shoots.Add(new Shoot(spawnPosition));
                 fireDelay = 0.0f;
 
@@ -158,6 +158,7 @@ namespace SFML_tutorial
                 shoots.RemoveAt(i);
             }
         }
+
 
         public FloatRect GetBounds()
         {
@@ -205,7 +206,7 @@ namespace SFML_tutorial
                     currentPosition.X -= speed * FrameRate.GetDeltaTime();
                 }
             }
-            
+
         }
 
         public string GetTag()
@@ -246,11 +247,11 @@ namespace SFML_tutorial
         public void playerDoDamage(int amount)
         {
             life -= amount;
-            if (life <= 0)
+            if(life <= 0)
             {
                 IsDead();
             }
-
+            
         }
 
         public bool IsDead()

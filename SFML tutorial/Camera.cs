@@ -68,14 +68,14 @@ namespace SFML_tutorial
         public FloatRect GetBounds()
         {
             return view.Viewport;
-                          
+
         }
-        
+
         public string GetTag()
         {
             return "colisionCamera";
         }
-        
+
         public void OnColision(IColisionable other)
         {
             //if (other is invisibleLimitLeft || other is InvisibleLimitRight)
@@ -102,7 +102,7 @@ namespace SFML_tutorial
 
         }
 
-        
+
 
         ///if (Keyboard.IsKeyPressed(Keyboard.Key.D))
         ///{

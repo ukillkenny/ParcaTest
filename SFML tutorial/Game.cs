@@ -9,7 +9,7 @@ namespace SFML_tutorial
 {
     class Game
     {
-        
+
         private static Vector2f windowSize;
         private RenderWindow window;
         private Gameplay gameplay;
@@ -68,7 +68,7 @@ namespace SFML_tutorial
         {
             return windowSize;
         }
-        
-    
+
+
     }
 }

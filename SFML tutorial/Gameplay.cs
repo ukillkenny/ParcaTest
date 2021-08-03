@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -11,10 +13,10 @@ namespace SFML_tutorial
     {
         private FirstLevel firstLevel;
 
-
         public Gameplay()
         {
-            firstLevel = new FirstLevel(1);
+            firstLevel = new FirstLevel();
+
         }
 
         public void Update()

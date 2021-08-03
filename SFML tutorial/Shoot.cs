@@ -5,18 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SFML.Audio;
 
 namespace SFML_tutorial
 {
     class Shoot : GameObjectBase, IColisionable
     {
-        
+        private Sound sound;
         public Shoot(Vector2f startPosition) : base("sprites" + Path.DirectorySeparatorChar + "shoot.png", startPosition)
         {
             
             sprite.Scale = new Vector2f(0.2f, 0.2f);
             CollisionManager.GetInstance().AddToCollisionManager(this);
-            
+            SoundBuffer soundBuffer = new SoundBuffer("Audio" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "master-fx-disparo.wav");
+            sound = new Sound(soundBuffer);
         
         }
 
@@ -33,7 +35,7 @@ namespace SFML_tutorial
         public void OnColision(IColisionable other)
         {
             if (other is Enemy)
-            {
+            {          
                 LateDispose();
             }   
         }
@@ -42,6 +44,7 @@ namespace SFML_tutorial
         {
             
             currentPosition.X += 1300 * FrameRate.GetDeltaTime();
+            sound.Play();
             base.Update();  
             
         }

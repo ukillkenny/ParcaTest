@@ -4,19 +4,27 @@ using System.Text;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using SFML.Audio;
+using System.IO;
 
 namespace SFML_tutorial
 {
 
     class FirstLevel
     {
+
         private Background background;
         private Player player;
         private Enemy enemy;
         private Vector2f initialPlayerPosition = new Vector2f(1.0f, 750.0f);
+
+
+        // private Vector2f initialEnemiesPosition = new Vector2f(1000.0f, 750.0f);
         private Vector2f setEnemyPosition;
         private List<Enemy> enemies;
         public bool toDelete;
+
+        private Sound sound;
 
         private Rock rock;
         private RockTwo rockTwo;
@@ -24,51 +32,49 @@ namespace SFML_tutorial
         private InvisibleTopWall invisibleTopWall;
         private invisibleLimitLeft invisibleLimitLeft;
         private InvisibleLimitRight InvisibleLimitRight;
-
-
+        
         private float enemySpawnTimer;
         private float enemySpawnTimerMax;
         int maxEnemeiesInLevel;
 
-        public FirstLevel(int maxEnemeiesInFloor)
+        public FirstLevel()
         {
             background = new Background();
-            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800, 150, 100);
-            //enemy = new Enemy(initialEnemiesPosition, "Enemy/animacion-enemigo.png", 4, 2, "Dementor", 800, 120, 200);
+            player = new Player(initialPlayerPosition, "Sprites/reaperok01.png", 4, 3, "Reaper", 800 , 150, 100);
+            //enemy = new Enemy(setEnemyPosition, "Enemy/animacion-enemigo.png", 4, 2, "Dementor", 800, 120, 200);
             rock = new Rock();
             rockTwo = new RockTwo();
 
+            SoundBuffer soundBuffer = new SoundBuffer("Audio" + Path.DirectorySeparatorChar + "music" + Path.DirectorySeparatorChar + "master-accion-desierto.wav");
+            sound = new Sound(soundBuffer);
+            sound.Play();
             invisibleBottomWall = new InvisibleBottomWall(new Vector2f(0.1f, 1080.0f), new Vector2f(6000.0f, 0.1f));
             invisibleTopWall = new InvisibleTopWall(new Vector2f(0.1f, 680.0f), new Vector2f(6000.0f, 0.1f));
             invisibleLimitLeft = new invisibleLimitLeft(new Vector2f(0.1f, 0.1f), new Vector2f(0.1f, 1080.0f));
             InvisibleLimitRight = new InvisibleLimitRight(new Vector2f(6000.0f, 0.1f), new Vector2f(0.1f, 1080.0f));
 
+            
+
             CreateEnemy();
+
 
             toDelete = false;
 
-            //enemies = new List<Enemy>();
-            //Random random = new Random();
-            //int enemiesInFloor = random.Next(1, maxEnemeiesInFloor);
-            //for (int i = 0; i < enemiesInFloor; i++)
-            //{
-            //    
-            //}
         }
 
         public void CreateEnemy()
         {
-
+            
             enemySpawnTimerMax = FrameRate.GetDeltaTime();
             enemySpawnTimer = enemySpawnTimerMax;
-
+            
             enemies = new List<Enemy>();
 
             maxEnemeiesInLevel = 10;
             int enemiesInLevel = maxEnemeiesInLevel;
             for (int i = 0; i < enemiesInLevel; i++)
             {
-
+                
                 enemies.Add(new Enemy(setEnemyPosition, "Enemy/animacion-enemigo.png", 4, 2, "Dementor", 800, 120, 200));
             }
         }
@@ -92,7 +98,7 @@ namespace SFML_tutorial
         {
             if (enemies.Count < maxEnemeiesInLevel)
             {
-                if (enemySpawnTimer >= enemySpawnTimerMax)
+                if(enemySpawnTimer >= enemySpawnTimerMax)
                 {
                     SpawnEnemy();
                     enemySpawnTimer = 0f;
@@ -104,9 +110,11 @@ namespace SFML_tutorial
             }
 
         }
+            
 
         public void Update()
         {
+            
             background.Update();
             if (player != null)
             {
@@ -137,42 +145,52 @@ namespace SFML_tutorial
             //}
             rock.Draw(window);
             rockTwo.Draw(window);
+            
         }
 
         private void DeleteEnemies()
         {
             List<int> indexToDelet = new List<int>();
-
             List<Enemy> enemiesAlive = new List<Enemy>();
+
 
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Update();
-
+            
                 if (enemies[i].IsDead())
                 {
                     indexToDelet.Add(i);
                 }
-
+            
                 if (enemies[i].IsDead() == false)
                 {
-
+            
                     enemiesAlive.Add(enemies[i]);
-
-                    if (enemiesAlive.Count == 0)
+            
+                    if(enemiesAlive.Count == 0)
                     {
-                        enemies[i] = null;
+                        enemiesAlive[i] = null;
                     }
                 }
 
+                if ((enemies[i].GetPosition().X < 0))
+                {
+                    indexToDelet.Add(i);
+                }
+            
             }
 
             enemies = enemiesAlive;
 
-            for (int i = indexToDelet.Count - 1; i >= 0; i--)
+            for (int j = indexToDelet.Count - 1; j > 0; j--)
             {
-                enemies[i].DisposeNow();
-                enemies.RemoveAt(i);
+
+                enemiesAlive[j].DisposeNow();
+                enemiesAlive.RemoveAt(j);
+
+                //enemies[i].DisposeNow();
+                //enemies.RemoveAt(i);
 
             }
 
@@ -208,8 +226,9 @@ namespace SFML_tutorial
             {
                 enemy.DisposeNow();
             }
+
+
         }
 
     }
-
 }

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SFML_tutorial
 {
-    class Enemy : GameObjectBase, IColisionable
+    class Enemy : GameObjectBase , IColisionable
     {
         private string name;
         private int life;
@@ -56,27 +56,27 @@ namespace SFML_tutorial
 
         }
 
-        // public Enemy(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minAttack, int maxAttack) : base()
-        // {
-        //     currentPosition = position;
-        //     this.sheetColumns = sheetColumns;
-        //     this.sheetRow = sheetRow;
-        //     texture = new Texture(spriteSheetPath);
-        //     frameRect = new IntRect(0, 0, (int)texture.Size.X / sheetColumns, (int)texture.Size.Y / sheetRow);
-        //     sprite = new Sprite(texture, frameRect);
-        //     sprite.Scale = new Vector2f(0.8f, 0.8f);
-        //     speed = 450.0f;
-        //     frameTimer = new Clock();
-        //     timerAnimation = new Clock();
-        //     CollisionManager.GetInstance().AddToCollisionManager(this);
-        //
-        //     this.name = name;
-        //     this.maxLife = maxLife;
-        //     this.life = maxLife;
-        //     this.MinAttack = minAttack;
-        //     this.MaxAttack = maxAttack;
-        //
-        // }
+       // public Enemy(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minAttack, int maxAttack) : base()
+       // {
+       //     currentPosition = position;
+       //     this.sheetColumns = sheetColumns;
+       //     this.sheetRow = sheetRow;
+       //     texture = new Texture(spriteSheetPath);
+       //     frameRect = new IntRect(0, 0, (int)texture.Size.X / sheetColumns, (int)texture.Size.Y / sheetRow);
+       //     sprite = new Sprite(texture, frameRect);
+       //     sprite.Scale = new Vector2f(0.8f, 0.8f);
+       //     speed = 450.0f;
+       //     frameTimer = new Clock();
+       //     timerAnimation = new Clock();
+       //     CollisionManager.GetInstance().AddToCollisionManager(this);
+       //
+       //     this.name = name;
+       //     this.maxLife = maxLife;
+       //     this.life = maxLife;
+       //     this.MinAttack = minAttack;
+       //     this.MaxAttack = maxAttack;
+       //
+       // }
 
         public override void Update()
         {
@@ -88,7 +88,7 @@ namespace SFML_tutorial
         public override void Draw(RenderWindow window)
         {
             base.Draw(window);
-
+            
         }
 
         private void UpdateAnimation()
@@ -134,9 +134,9 @@ namespace SFML_tutorial
             {
 
                 DoDamage(Shoot.ShootDamage(200));
-
+                
             }
-
+            
         }
 
         public override void DisposeNow()
@@ -148,20 +148,12 @@ namespace SFML_tutorial
         public void DoDamage(int amount)
         {
             life -= amount;
-            //if(life <= 0)
-            //{
-            //    IsDead();
-            //}
-            //if (IsDead())
-            //{
-            //    LateDispose();
-            //}
             IsDead();
         }
 
         public bool IsDead()
         {
-            if (life <= 0)
+            if(life <= 0)
             {
                 LateDispose();
             }
