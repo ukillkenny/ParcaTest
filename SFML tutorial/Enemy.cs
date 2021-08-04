@@ -135,7 +135,7 @@ namespace SFML_tutorial
                 DoDamage(Shoot.ShootDamage(200));
                 if(life <= 0)
                 {
-                    LateDispose();
+                    IsDead();
                 }
 
             }
@@ -151,10 +151,10 @@ namespace SFML_tutorial
         public void DoDamage(int amount)
         {
             life -= amount;
-            if (life <= 0)
-            {
-                IsDead();
-            }
+            //if (life <= 0)
+            //{
+            //    IsDead();
+            //}
         }
         
         public bool IsDead()

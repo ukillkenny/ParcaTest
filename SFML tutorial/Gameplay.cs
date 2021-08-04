@@ -12,6 +12,7 @@ namespace SFML_tutorial
     class Gameplay
     {
         private FirstLevel firstLevel;
+        //private bool finishLevel = false;
 
         public Gameplay()
         {

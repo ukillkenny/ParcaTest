@@ -10,7 +10,7 @@ using System.IO;
 namespace SFML_tutorial
 {
 
-    class FirstLevel : GameObjectBase
+    class FirstLevel
     {
 
         private Background background;
@@ -67,7 +67,7 @@ namespace SFML_tutorial
         {
             // Crear enemigos
             enemies = new List<Enemy>();
-            maxEnemiesInLevel = 1;
+            maxEnemiesInLevel = 20;
             int enemiesInLevel = maxEnemiesInLevel;
             for (int i = 0; i < enemiesInLevel; i++)
             {
@@ -139,7 +139,7 @@ namespace SFML_tutorial
 
         // FIN DE FUNCIONABA ANTERIORMENTE
 
-        public override void Update()
+        public void Update()
         {
             
             background.Update();
@@ -155,7 +155,7 @@ namespace SFML_tutorial
             DoorLvlTwo.Update();
         }
 
-        public override void Draw(RenderWindow window)
+        public void Draw(RenderWindow window)
         {
             background.Draw(window);
             if (player != null)
@@ -188,10 +188,10 @@ namespace SFML_tutorial
             {
                 enemies[i].Update();
 
-                //if(enemies[i].IsDead())
-                //{
-                //    indexToDelete.Add(i);
-                //}
+                if(enemies[i].IsDead())
+                {
+                    indexToDelete.Add(i);
+                }
                 if ((enemies[i].GetPosition().X < 0))
                 {
                     indexToDelete.Add(i);
@@ -201,6 +201,7 @@ namespace SFML_tutorial
 
             for (int i = indexToDelete.Count - 1; i >= 0; i--)
             {
+                
                 enemies[i].DisposeNow();
                 enemies.RemoveAt(i);
             }
@@ -261,7 +262,7 @@ namespace SFML_tutorial
 
         // FIN DE ELIMINACION DE ENEMIGOS QUE FUNCIONABA
 
-        public override void CheckGarbage()
+        public void CheckGarbage()
         {
             if (player != null)
             {
@@ -273,25 +274,51 @@ namespace SFML_tutorial
                 }
             }
 
-            List<int> indexToDelete = new List<int>();
+            //
+            //for (int i = 0; i < enemies.Count; i++)
+            //{
+            //    enemies[i].CheckGarbage();
+            //    if (enemies[i].toDelete)
+            //    {
+            //        indexToDelete.Add(i);
+            //    }
+            //}
 
-            for (int i = 0; i < enemies.Count; i++)
+            //List<int> indexToDelete = new List<int>();
+
+            //for(int i = 0; i < enemies.Count; i++)
+            //{
+            //    enemies[i].CheckGarbage();
+            //    if (enemies[i].toDelete)
+            //    {
+            //        indexToDelete.Add(i);
+            //    }
+            //}
+            //
+            //for (int i = 0; i < indexToDelete.Count; i++)
+            //{
+            //    enemies.RemoveAt(i);
+            //}
+
+            if (enemy != null)
             {
-                enemies[i].CheckGarbage();
-                if (enemies[i].toDelete)
+                enemy.CheckGarbage();
+                if(enemy.toDelete)
                 {
-                    indexToDelete.Add(i);
+                    enemy = null;
                 }
-            }
-            for (int i = 0; i < indexToDelete.Count; i++)
-            {
-                enemies.RemoveAt(i);
-            }
-            if (toDelete == true)
-            {
-                DisposeNow();
-            }
-            base.CheckGarbage();
+            }               
+
+            //for (int i = 0; i < indexToDelete.Count; i++)
+            //{
+            //    enemies.RemoveAt(i);
+            //}
+            //if (toDelete == true)
+            //{
+            //    DisposeNow();
+            //}
+
+            //base.CheckGarbage();
         }
 
 
@@ -318,7 +345,16 @@ namespace SFML_tutorial
 
         // FIN DE LO QUE ANTES FUNCIONABA
 
+        //-------------------------------------------------------------------------
+
+        //public bool EndOfLevel()
+        //{
+        //    return true;
+        //}
+
     }
+
+    
 
 }
 
