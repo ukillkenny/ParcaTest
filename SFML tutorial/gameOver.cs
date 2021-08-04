@@ -13,6 +13,7 @@ namespace SFML_tutorial
         private Sprite spriteBack;
         private Vector2f positionBack;
         //private float backSpeed;
+        //private Camera camera;
 
         public gameOver()
         {
@@ -26,7 +27,7 @@ namespace SFML_tutorial
         public bool Update()
         {
             spriteBack.Position = positionBack;
-
+            //camera = null;
             return true;
             // BackgroundMovement();
         }

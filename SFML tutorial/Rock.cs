@@ -10,9 +10,9 @@ namespace SFML_tutorial
     class Rock : GameObjectBase, IColisionable
     {
 
-        public Rock() : base ("sprites" + Path.DirectorySeparatorChar + "rock-01.png", new Vector2f(2000.0f, 960.0f))
+        public Rock() : base ("sprites" + Path.DirectorySeparatorChar + "rock-01.png", new Vector2f(2000.0f, 888.0f))
         {
-            sprite.Scale = new Vector2f(1.0f, 1.0f);
+            sprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
         public override void CheckGarbage()

@@ -23,7 +23,7 @@ namespace SFML_tutorial
         private float animationTime = 1f;
         private Clock timerAnimation;
         private Clock moveAnimationTime;
-        private float moveTime = 1f;
+        //private float moveTime = 1f;
 
         //private Vector2f initialEnemyArea;
         //private Clock enemyMoveTimer;
@@ -132,9 +132,12 @@ namespace SFML_tutorial
         {
             if (other is Shoot)
             {
-
                 DoDamage(Shoot.ShootDamage(200));
-                
+                if(life <= 0)
+                {
+                    LateDispose();
+                }
+
             }
             
         }
@@ -148,18 +151,24 @@ namespace SFML_tutorial
         public void DoDamage(int amount)
         {
             life -= amount;
-            IsDead();
+            if (life <= 0)
+            {
+                IsDead();
+            }
         }
-
+        
         public bool IsDead()
         {
-            if(life <= 0)
-            {
-                LateDispose();
-            }
-            //LateDispose();
+            LateDispose();
             return life <= 0;
         }
+        
+        //public bool Kill()
+        //{
+        //    LateDispose();
+        //    
+        //    return true;
+        //}
 
         public static int enemyDamage(int damage)
         {

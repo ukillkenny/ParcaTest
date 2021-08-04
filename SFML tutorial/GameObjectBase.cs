@@ -61,7 +61,7 @@ namespace SFML_tutorial
         {
             if (lateDispose == true)
             {
-                DisposeNow();
+               DisposeNow();
             }
         }
 

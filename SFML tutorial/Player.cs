@@ -22,6 +22,8 @@ namespace SFML_tutorial
         private float animationTime = 1f;
         private Clock timerAnimation;
         private Vector2f fireRange;
+        private float damageDelay;
+        private float damageRate;
 
 
         private string name;
@@ -49,6 +51,8 @@ namespace SFML_tutorial
             fireRate = 0.2f;
             fireDelay = 0.2f;
             fireRange = new Vector2f(1300.0f, 0.0f);
+            damageDelay = 4.0f;
+            damageRate = 4.0f;
 
             this.name = name;
             this.maxLife = maxLife;
@@ -124,14 +128,14 @@ namespace SFML_tutorial
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && fireDelay >= fireRate)
             {
+               
                 Vector2f spawnPosition = currentPosition;
                 spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 5f;
                 spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 10f;
                 shoots.Add(new Shoot(spawnPosition));
                 fireDelay = 0.0f;
-
-
             }
+            
             fireDelay += FrameRate.GetDeltaTime();
 
         }
@@ -207,6 +211,17 @@ namespace SFML_tutorial
                 }
             }
 
+            if(other is Enemy)
+            {
+                if(damageDelay >= damageRate)
+                {
+
+                    playerDoDamage(Enemy.enemyDamage(200));
+                    damageDelay = 0.0f;
+                }
+                damageDelay += FrameRate.GetDeltaTime();
+            }
+
         }
 
         public string GetTag()
@@ -247,16 +262,18 @@ namespace SFML_tutorial
         public void playerDoDamage(int amount)
         {
             life -= amount;
-            if(life <= 0)
-            {
-                IsDead();
-            }
-            
+            IsDead();
+
         }
 
         public bool IsDead()
         {
-            LateDispose();
+            if (life <= 0)
+            {
+                //DisposeNow();
+                LateDispose();
+            }
+
             return life <= 0;
         }
     }

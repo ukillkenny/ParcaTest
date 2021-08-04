@@ -9,9 +9,9 @@ namespace SFML_tutorial
 {
     class RockTwo : GameObjectBase, IColisionable
     {
-        public RockTwo() : base("sprites" + Path.DirectorySeparatorChar + "rock-02.png", new Vector2f(4000.0f, 943.0f))
+        public RockTwo() : base("sprites" + Path.DirectorySeparatorChar + "rock-02.png", new Vector2f(4000.0f, 888.0f))
         {
-            sprite.Scale = new Vector2f(1.0f, 1.0f);
+            sprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
         public override void CheckGarbage()

@@ -17,7 +17,7 @@ namespace SFML_tutorial
 
         public Background()
         {
-            textureBack = new Texture("landscape/Desierto_Entero.png");
+            textureBack = new Texture("landscape/Escenarios-1.png");
             spriteBack = new Sprite(textureBack);
             spriteBack.Scale = new Vector2f(1.0f, 1.0f);
             positionBack = new Vector2f(0.0f, 0.0f);

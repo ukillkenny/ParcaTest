@@ -38,6 +38,7 @@ namespace SFML_tutorial
             {          
                 LateDispose();
             }   
+            
         }
 
         public override void Update()
