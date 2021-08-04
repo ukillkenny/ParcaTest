@@ -17,6 +17,7 @@ namespace SFML_tutorial
         private Player player;
         private Enemy enemy;
         private Vector2f initialPlayerPosition = new Vector2f(1.0f, 750.0f);
+        private DoorLvlTwo DoorLvlTwo;
 
 
         // private Vector2f initialEnemiesPosition = new Vector2f(1000.0f, 750.0f);
@@ -44,6 +45,7 @@ namespace SFML_tutorial
 
             rock = new Rock();
             rockTwo = new RockTwo();
+            DoorLvlTwo = new DoorLvlTwo();
 
 
             music = new Music("Audio" + Path.DirectorySeparatorChar + "music" + Path.DirectorySeparatorChar + "master-accion-desierto.wav");
@@ -65,7 +67,7 @@ namespace SFML_tutorial
         {
             // Crear enemigos
             enemies = new List<Enemy>();
-            maxEnemiesInLevel = 5;
+            maxEnemiesInLevel = 1;
             int enemiesInLevel = maxEnemiesInLevel;
             for (int i = 0; i < enemiesInLevel; i++)
             {
@@ -150,6 +152,7 @@ namespace SFML_tutorial
             DeleteEnemies();
             rock.Update();
             rockTwo.Update();
+            DoorLvlTwo.Update();
         }
 
         public override void Draw(RenderWindow window)
@@ -173,6 +176,7 @@ namespace SFML_tutorial
             //}
             rock.Draw(window);
             rockTwo.Draw(window);
+            DoorLvlTwo.Draw(window);
             
         }
 
