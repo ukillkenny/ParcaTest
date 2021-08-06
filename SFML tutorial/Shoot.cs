@@ -17,8 +17,7 @@ namespace SFML_tutorial
             
             sprite.Scale = new Vector2f(0.2f, 0.2f);
             CollisionManager.GetInstance().AddToCollisionManager(this);
-            SoundBuffer soundBuffer = new SoundBuffer("Audio" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "master-fx-disparo.wav");
-            sound = new Sound(soundBuffer);
+
         
         }
 
@@ -36,7 +35,7 @@ namespace SFML_tutorial
         {
             if (other is Enemy)
             {          
-                LateDispose();
+                 LateDispose();
             }   
             
         }
@@ -45,7 +44,7 @@ namespace SFML_tutorial
         {
             
             currentPosition.X += 1300 * FrameRate.GetDeltaTime();
-            sound.Play();
+
             base.Update();  
             
         }

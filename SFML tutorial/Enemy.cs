@@ -110,7 +110,7 @@ namespace SFML_tutorial
 
         public void UpdateEnemyArea()
         {
-            currentPosition.X -= speed * FrameRate.GetDeltaTime();
+            currentPosition.X -= speed * 0.02F;
             //if (moveAnimationTime.ElapsedTime.AsSeconds() > moveTime)
             //{
             //    currentPosition.X -= speed * FrameRate.GetDeltaTime();
@@ -133,13 +133,12 @@ namespace SFML_tutorial
             if (other is Shoot)
             {
                 DoDamage(Shoot.ShootDamage(200));
-                if(life <= 0)
+                if(IsDead())
                 {
-                    IsDead();
+                    LateDispose();
                 }
 
-            }
-            
+            } 
         }
 
         public override void DisposeNow()
@@ -159,7 +158,6 @@ namespace SFML_tutorial
         
         public bool IsDead()
         {
-            LateDispose();
             return life <= 0;
         }
         

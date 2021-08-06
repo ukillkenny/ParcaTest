@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using SFML.Audio;
+using System.IO;
 
 namespace SFML_tutorial
 {
@@ -31,7 +33,7 @@ namespace SFML_tutorial
         private int maxLife;
         private int mana;
         private int maxMana;
-
+        private Sound sound;
 
         public Player(Vector2f position, string spriteSheetPath, int sheetColumns, int sheetRow, string name, int maxLife, int minMana, int maxMana) : base()
         {
@@ -133,6 +135,9 @@ namespace SFML_tutorial
                 spawnPosition.X += (texture.Size.X * sprite.Scale.X) / 5f;
                 spawnPosition.Y += (texture.Size.Y * sprite.Scale.Y)/ 10f;
                 shoots.Add(new Shoot(spawnPosition));
+                SoundBuffer soundBuffer = new SoundBuffer("Audio" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "master-fx-disparo.wav");
+                sound = new Sound(soundBuffer);
+                sound.Play();
                 fireDelay = 0.0f;
             }
             

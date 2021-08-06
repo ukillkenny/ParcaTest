@@ -51,6 +51,6 @@ namespace SFML_tutorial
                     }
                 }
             }
-        }
+         }
     }
 }

@@ -16,8 +16,8 @@ namespace SFML_tutorial
             while(game.UpdateWindow())
             {
                 game.UpdateGame();
-                game.CheckGarbage();
                 CollisionManager.GetInstance().CheckCollisions();
+                game.CheckGarbage();
                 game.DrawGame();
 
                 FrameRate.OnFrameEnd();
